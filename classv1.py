@@ -16,9 +16,13 @@ class MethodDef:
     """
 
     def __init__(self, method_def):
-        self.method_name = method_def[1]
-        self.formal_params = method_def[2]
-        self.code = method_def[3]
+        self.return_type = method_def[1]
+        self.method_name = method_def[2]
+        self.formal_params = method_def[3]
+        self.code = method_def[4]
+
+    def get_return_type(self):
+        return self.return_type
 
 
 class FieldDef:
@@ -27,8 +31,9 @@ class FieldDef:
     """
 
     def __init__(self, field_def):
-        self.field_name = field_def[1]
-        self.default_field_value = field_def[2]
+        self.field_type = field_def[1]
+        self.field_name = field_def[2]
+        self.default_field_value = field_def[3]
 
 
 class ClassDef:
@@ -77,11 +82,12 @@ class ClassDef:
         methods_defined_so_far = set()
         for member in class_body:
             if member[0] == InterpreterBase.METHOD_DEF:
-                if member[1] in methods_defined_so_far:  # redefinition
+                methodName = member[2]
+                if methodName in methods_defined_so_far:  # redefinition
                     self.interpreter.error(
                         ErrorType.NAME_ERROR,
                         "duplicate method " + member[1],
                         member[0].line_num,
                     )
                 self.methods.append(MethodDef(member))
-                methods_defined_so_far.add(member[1])
+                methods_defined_so_far.add(methodName)

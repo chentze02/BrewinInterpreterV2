@@ -1,32 +1,49 @@
-# CS 131 Spring 2023: Project Starter
+# BREWIN COMPILER IN PYTHON
 
-Hey there! This is a template repository that contains the necessary boilerplate for [CS 131](https://ucla-cs-131.github.io/spring-23/)'s quarter-long project: making an interpreter. The project specs are as follows:
+**NOW SUPPORTS INHERITANCE, PARAMETRIC POLYMORPHISM, STATIC TYPING, VARIABLE SHADOWING**
 
-1. [Project 1 Spec](https://docs.google.com/document/d/1pPQ2qZKbbsbZGBSwvuy1Ir-NZLPMgVt95WPQuI5aPho)
-1. [Project 2 Spec](https://docs.google.com/document/d/1simlDMO0TK-YNDPYjkuU1C3fcaBpbIVYRaKD1pdqJj8/edit?usp=sharing)
+1. Clone the repository to your local machine.
 
-There are three stages to the project; students are currently at the second. Thus, this folder contains the necessary bootstrapping code:
+2. Write a program in Brewin:
 
-- `intbase.py`, the base class and enum definitions for the interpreter
-- `bparser.py`, a static `parser` class to parse Brewin programs
-- `interpreterv1.py`, a working top-level interpreter for project 1 that mostly delegates interpreting work to:
-  - `classv1.py` which handles class, field, and method definitions
-  - `env1.py` which handles the program environment (a map from variables to values)
-  - `objectv1.py` which handles operations on *objects*, which include statements, expressions, etc; most of the code is here!
-  - `type_valuev1.py` which has classes to create type tags
+```brewin
+(class obj
+  (method obj obj_call ()
+    (print "object")
+  )
+)
 
-You can view the starter for [Project 1](https://github.com/UCLA-CS-131/spring-23-project-starter/releases/tag/p1).
+(class main
+  (field obj object null)
+  (method void main ()
+    (begin
+      (set object (new obj))
+      (print (call me void_call))
+      (print (call me null_call))
+      (print (call me int_call))
+      (print (call me bool_call))
+      (print (call me string_call))
+      (print (call object obj_call))
+    )
+  )
+  
+  (method void void_call ()
+    (print "void")
+  )
+  (method main null_call ()
+    (print "null")
+  )
+  (method int int_call ()
+    (print "int")
+  )
+  (method bool bool_call ()
+    (print "bool")
+  )
+  (method string string_call ()
+    (print "string")
+  )
+)
 
-Some notes on your submission (for Project 2)
+3. Put the file into input.txt and run python3 interpreter.py.
 
-1. You **must have a top-level, versioned `interpreterv2.py` file** that **exports the `Interpreter` class**. If not, **your code will not run on our autograder**.
-2. You may also submit one or more additional `.py` modules that your interpreter uses, if you decide to break up your solution into multiple `.py` files.
-3. You **should not modify/submit `intbase.py` or `bparser.py`**; we will use our own when grading.
-
-You can find out more about our autograder, including how to run it, in [its accompanying repo](https://github.com/UCLA-CS-131/spring-23-autograder).
-
-## Licensing and Attribution
-
-This is an unlicensed repository; even though the source code is public, it is **not** governed by an open-source license.
-
-This code was primarily written by [Carey Nachenberg](http://careynachenberg.weebly.com/), with support from his TAs for the [Spring 2023 iteration of CS 131](https://ucla-cs-131.github.io/spring-23/).
+4. Watch your Brewin Program get interpreted.

@@ -28,4 +28,4 @@ class EnvironmentManager:
         """
         Set data associated with a variable name.
         """
-        self.environment[symbol] = value
+        self.environment[symbol[1]] = value

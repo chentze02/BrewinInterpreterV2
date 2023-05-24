@@ -9,6 +9,18 @@ from bparser import BParser
 from objectv1 import ObjectDef
 
 
+def read_file(filename):
+    lines = []
+    with open(filename, 'r') as file:
+        for line in file:
+            lines.append(line.strip())
+    return lines
+
+
+program_source = read_file(
+    '/Users/chentzen02/Documents/CS131/project/project2/input.txt')
+
+
 class Interpreter(InterpreterBase):
     """
     Main interpreter class that subclasses InterpreterBase.
@@ -74,3 +86,10 @@ class Interpreter(InterpreterBase):
                         item[0].line_num,
                     )
                 self.class_index[item[1]] = ClassDef(item, self)
+
+
+if __name__ == '__main__':
+    intepreter = Interpreter()
+    intepreter.run(program_source)
+
+    print(f"FULLL OUTPUTTTT {intepreter.get_output()}")
